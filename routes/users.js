@@ -39,7 +39,11 @@ router.post('/login', storeReturnTo, passport.authenticate('local', {failureFlas
 })
 
 router.get('/logout', (req, res) => {
-    req.logout();
+    req.logout((err) => {
+        if (err) {
+            console.log("Error: ", err);
+        }
+    });
     req.flash('success', 'Goodbye!');
     res.redirect('/campgrounds');
 })
