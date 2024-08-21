@@ -3,6 +3,7 @@ const axios = require('axios');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers')
 const Campground = require('../models/campground');
+const { getGeocoding } = require('../external/maptiler');
 
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
@@ -41,9 +42,12 @@ const seedDB = async () => {
     for (let i = 0; i < 50; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
+        const location = `${cities[random1000].city}, ${cities[random1000].state}`;
+        const geoData = await getGeocoding(location);
         const camp = new Campground({
             author: '66b4bac1b0454a7c7e27a93e',
-            location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            location: location,
+            geometry: geoData,
             title: `${sample(descriptors)} ${sample(places)}`,
             images: [
                 {

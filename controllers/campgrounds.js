@@ -1,5 +1,6 @@
 const Campground = require('../models/campground');
 const cloudinary = require('cloudinary').v2;
+const { getGeocoding } = require('../external/maptiler');
 
 module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({});
@@ -15,7 +16,9 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createCampground = async (req, res, next) => {
+    const geoData = await getGeocoding(req.body.campground.location);
     const campground = new Campground(req.body.campground);
+    campground.geometry = geoData;
     campground.images = req.files.map(f => ({
         url: f.path,
         filename: f.filename
