@@ -7,9 +7,9 @@
       <div class="row">
         <div class="col-md-4">
           <% if(campground.images.length) { %>
-            <img class="img-fluid" alt="" src="<%=campground?.images[0].url%>">
+            <img class="img-fluid" alt="" crossorigin="anonymous" src="<%=campground?.images[0].url%>">
             <% } else { %>
-              <img
+              <img crossorigin="anonymous"
                 src="https://res.cloudinary.com/dc62xcqrk/image/upload/w_200/v1723630758/YelpCamp/rukfsrfaq3atskoehuqo.png">
               <% } %>
         </div>
@@ -37,5 +37,5 @@
         const mapToken = '<%= process.env.GOOGLE_MAPS_API_KEY %>';
         const campgrounds = <%- JSON.stringify(campgrounds) %>;
       </script>
-      <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-      <script src="/javascripts/clusterMap.js"></script>
+      <script crossorigin="anonymous" src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+      <script crossorigin="anonymous" src="/javascripts/clusterMap.js"></script>

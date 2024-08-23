@@ -3,7 +3,6 @@ const cloudinary = require('cloudinary').v2;
 const { getGeocoding } = require('../external/maptiler');
 
 module.exports.index = async (req, res) => {
-    console.log(req.query);
     const campgrounds = await Campground.find({});
     res.render('campgrounds/index', { campgrounds });
 }

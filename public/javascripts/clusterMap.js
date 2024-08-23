@@ -13,8 +13,8 @@ async function initMap() {
         };
     });
 
-    const averageLat = campgrounds.reduce((acc, campground) => acc + campground.geometry.coordinates[1], 0) / campgrounds.length;
-    const averageLng = campgrounds.reduce((acc, campground) => acc + campground.geometry.coordinates[0], 0) / campgrounds.length;
+    const averageLat = campgrounds.reduce((acc, campground) => acc + campground.geometry.coordinates[1], 0) / campgrounds.length | 0;
+    const averageLng = campgrounds.reduce((acc, campground) => acc + campground.geometry.coordinates[0], 0) / campgrounds.length | 0;
 
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
